@@ -3,45 +3,55 @@ package coffee.order;
 
 import java.util.Map;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.TreeMap;
 
 
 public class CoffeeOrderBoard implements Comparable<CoffeeOrderBoard> {
 
-    Map<Integer,Order> map = new TreeMap<>();
+    //Map<Integer,Order> map = new TreeMap<>();
+    Queue <Order> queue = new PriorityQueue<>();
 
-     public int numOrder;
+
+    public static int numOrder ;
+
+    public CoffeeOrderBoard() {
+        numOrder++;
+    }
 
     @Override
     public String toString() {
-        return "All Queue: " +
-                 map ;
+        return "CoffeeOrderBoard{" +
+                "queue=" + queue +
+                '}';
+    }
+
+    public PriorityQueue<Order> add(Order order) {
+
+        queue.add(order);
+
+        return (PriorityQueue<Order>) queue;
 
 
     }
+    public PriorityQueue<Order> deliver(){
+        queue.remove();
 
-    public Map<Integer,Order> add(int numOrder, Order order) {
-
-        map.put(numOrder, order);
-        return map;
-
-
+        return (PriorityQueue<Order>) queue;
     }
-    public Map<Integer,Order> deliver(int numOrder){
-        map.remove(numOrder);
-        return map;
-    }
-    public void draw () {
-        for (Map.Entry<Integer, Order> m : map.entrySet()) {
-            System.out.println(m.getKey() +" | " + m.getValue());
-        }
+   public void draw () {
+       for (Order p : queue) {
 
-    }
+           System.out.println(p.getName());
 
-    @Override
-    public int compareTo(CoffeeOrderBoard o) {
-        return this.numOrder - o.numOrder;
-    }
+       }
+   }
+
+       @Override
+       public int compareTo (CoffeeOrderBoard o){
+           return this.numOrder - o.numOrder;
+       }
 
 
 }

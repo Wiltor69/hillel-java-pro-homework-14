@@ -1,13 +1,39 @@
 package coffee.order;
 
-public class Order implements Comparable<Order>{
-    int order;
-    String name;
+import java.util.Objects;
 
-    public Order(int order, String name) {
+public class Order implements Comparable<Order>{
+    private static int order;
+
+    private String name;
+
+    public Order(int order,String name) {
+       this.order = order;
+        this.name = name;
+        order ++;
+
+
+
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
         this.order = order;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
+
+
+
 
     @Override
     public String toString() {
